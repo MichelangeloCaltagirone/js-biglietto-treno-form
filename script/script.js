@@ -37,6 +37,7 @@ const userAgeField = document.getElementById('userAge');
 const userKmField = document.getElementById('userKm');
 const btnCalcPrize = document.querySelector('button');
 const priceResult = document.querySelector('span');
+const kmChoice = document.getElementById('kmChoice');
 const kmPrice = 0.21;
 
 // Gestiosco Eventi
@@ -58,8 +59,8 @@ btnCalcPrize.addEventListener('click', function (e) {
     const isInvalidKm = isNaN(userKm) || userKm < 1;
     console.log(isInvalidKm, 'invalidKm?');
 
-    if (isInvalidKm) {   // non è molto carino, se sbagli entrambi ti dirà solo che avrai sbagliato il primo, in questo caso l'età
-        const errorMessage = isInvalidKm ? "Hai inserito un'età sbagliata!" : "Hai inserito un kilometraggio sbagliato!";
+    if (isInvalidKm) { 
+        const errorMessage = "Hai inserito dei km sbagliati!";
         alert(errorMessage);
         location.reload();   // se trovo errore, ricarico la pagina
 }
@@ -87,13 +88,19 @@ btnCalcPrize.addEventListener('click', function (e) {
         finalPrice -= discountAmount;
         console.log('finalPrice:', finalPrice);
 
-        priceResult.innerHTML = `${discountMessage} e il nuovo prezzo è: ${finalPrice.toFixed(2)}€`;
+        priceResult.innerHTML = `${discountMessage} e il nuovo prezzo è: ${finalPrice.toFixed(2)}€. Il vecchio prezzo era di: ${startPrice.toFixed(2)}€`;
         console.log('finalPrice:', finalPrice);
 
     } else {
         priceResult.innerHTML = `Il prezzo del tuo biglietto è ${finalPrice.toFixed(2)}€`;
         console.log('finalPrice:', finalPrice);
     }
+
+    kmChoice.innerHTML = `Hai scelto di percorrere ben: ${userKm} km!`;
+
+    
+
+
 
     
 
