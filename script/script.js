@@ -36,6 +36,7 @@ console.log('ehilà!');
 const userAgeField = document.getElementById('userAge');
 const userKmField = document.getElementById('userKm');
 const btnCalcPrize = document.querySelector('button');
+const priceResult = document.querySelector('span');
 const kmPrice = 0.21;
 
 // Gestiosco Eventi
@@ -63,16 +64,21 @@ btnCalcPrize.addEventListener('click', function (e) {
     console.log('discount:', discount);
     
     if (discount) {
+
+        // prendo l'elemento che mi interessa
+
+        const discountMessage  = `Hai diritto ad un <strong>${discount}%</strong> di sconto,`;
+
+        const discountAmount = (startPrice / 100) * discount;       
+
+        finalPrice -= discountAmount;
+        console.log('finalPrice:', finalPrice);
+
+        priceResult.innerHTML = `${discountMessage} e il nuovo prezzo è: ${finalPrice.toFixed(2)}€`;
+        console.log('finalPrice:', finalPrice);
         
-        const priceResult = document.querySelector('span'); // prendo l'elemento che mi interessa
-
-        const discountMessage  = `Hai diritto ad un <strong>${discount}%</strong> di sconto`
-
-        const discountAmount = (startPrice / 100) * discount;
-
-       
-
-        let finalPrice = finalPrice - discountAmount;
+    } else {
+        priceResult.innerHTML = `Il prezzo del tuo biglietto è ${finalPrice.toFixed(2)}€`;
         console.log('finalPrice:', finalPrice);
     }
 
