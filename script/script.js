@@ -33,6 +33,50 @@ console.log('ehilà!');
 
 // Prep
 
-const userAge = document.getElementById('userAge');
-const userKm = document.getElementById('userKm');
+const userAgeField = document.getElementById('userAge');
+const userKmField = document.getElementById('userKm');
 const btnCalcPrize = document.querySelector('button');
+const kmPrice = 0.21;
+
+// Gestiosco Eventi
+
+btnCalcPrize.addEventListener('click', function (e) {
+    e.preventDefault()
+  //recupero dati da input
+
+    const userAge = parseInt(userAgeField.value);
+    const userKm = parseInt(userKmField.value);
+    console.log('userAge:', userAge);
+    console.log('userKm:', userKm);
+
+    // Valido dati
+
+    // Elaboro dati
+
+    const startPrice = kmPrice * userKm;
+    
+    let discount;
+    if (userAge > 64) discount = 40;
+    else if (userAge < 18) discount = 20;
+    let finalPrice = startPrice;
+
+    console.log('discount:', discount);
+    
+    if (discount) {
+        
+        const priceResult = document.querySelector('span'); // prendo l'elemento che mi interessa
+
+        const discountMessage  = `Hai diritto ad un <strong>${discount}%</strong> di sconto`
+
+        const discountAmount = (startPrice / 100) * discount;
+
+       
+
+        let finalPrice = finalPrice - discountAmount;
+        console.log('finalPrice:', finalPrice);
+    }
+
+    
+
+
+})
