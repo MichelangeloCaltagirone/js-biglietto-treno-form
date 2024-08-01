@@ -45,23 +45,36 @@ btnCalcPrize.addEventListener('click', function (e) {
     e.preventDefault()
   //recupero dati da input
 
-    const userAge = parseInt(userAgeField.value);
+    const userAge = (userAgeField.value);
     const userKm = parseInt(userKmField.value);
     console.log('userAge:', userAge);
     console.log('userKm:', userKm);
 
     // Valido dati
+    /*
+    const isInvalidAge = isNaN(userAge) || userAge < 1;
+    console.log(isInvalidAge, 'invalidAge?');
+    */
+    const isInvalidKm = isNaN(userKm) || userKm < 1;
+    console.log(isInvalidKm, 'invalidKm?');
+
+    if (isInvalidKm) {   // non è molto carino, se sbagli entrambi ti dirà solo che avrai sbagliato il primo, in questo caso l'età
+        const errorMessage = isInvalidKm ? "Hai inserito un'età sbagliata!" : "Hai inserito un kilometraggio sbagliato!";
+        alert(errorMessage);
+        location.reload();   // se trovo errore, ricarico la pagina
+}
 
     // Elaboro dati
 
     const startPrice = kmPrice * userKm;
-    
-    let discount;
-    if (userAge > 64) discount = 40;
-    else if (userAge < 18) discount = 20;
     let finalPrice = startPrice;
 
+    let discount;
+    if (userAge === 'over65') discount = 40;
+    else if (userAge === 'minorenne') discount = 20;
     console.log('discount:', discount);
+    
+
     
     if (discount) {
 
@@ -76,7 +89,7 @@ btnCalcPrize.addEventListener('click', function (e) {
 
         priceResult.innerHTML = `${discountMessage} e il nuovo prezzo è: ${finalPrice.toFixed(2)}€`;
         console.log('finalPrice:', finalPrice);
-        
+
     } else {
         priceResult.innerHTML = `Il prezzo del tuo biglietto è ${finalPrice.toFixed(2)}€`;
         console.log('finalPrice:', finalPrice);
